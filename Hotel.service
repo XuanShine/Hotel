@@ -1,0 +1,12 @@
+
+Description=Hotel
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/home/aroma/Projects/Hotel/venv/bin/python /home/aroma/Projects/Hotel/main.py
+WorkingDirectory=/home/aroma/Projects/Hotel
+
+[Install]
+WantedBy=multi-user.target

@@ -220,4 +220,11 @@ def menageMenage(dateStr=False):
                   {menage.note}""")
 
 
-ui.run(storage_secret='aurisetnaruaruiealudieauinrasuireastuiraranrui')
+if __name__ == "__main__":
+    ui.run(
+        storage_secret= 'aurisetnaruaruiealudieauinrasuireastuiraranrui',
+        title= "Hôtel Panorama Grasse",
+        host= "0.0.0.0",
+        port= 8083,
+        show= False
+    )
