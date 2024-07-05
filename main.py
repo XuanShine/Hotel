@@ -29,7 +29,7 @@ users = [{
 
 @ui.page("/")
 def main():
-    if not (userId := app.storage.user.get("user", False)):
+    if not (userId := app.storage.browser.get("user", False)):
         ui.navigate.to("/login")
     else:
         for user in users:
@@ -40,7 +40,7 @@ def main():
 @ui.page("/login")
 def login():
     def connect(user, link):
-        app.storage.user["user"] = user
+        app.storage.browser["user"] = user
         ui.navigate.to(link)
 
     ui.label("Utilisateur ?")
@@ -51,10 +51,10 @@ def login():
                       on_click=lambda user=user, link=link: connect(user["id"], link))
 
 def header(accueil=True):
-    user = app.storage.user.get("user", "Error")
+    user = app.storage.browser.get("user", "Error")
 
     def disconnect():
-        app.storage.user["user"] = False
+        app.storage.browser["user"] = False
         ui.navigate.to("/")
 
     @db_session
@@ -83,7 +83,7 @@ def header(accueil=True):
 
 @ui.page("/reception")
 def reception():
-    user = app.storage.user.get("user", "Error")
+    user = app.storage.browser.get("user", "Error")
     header()
     ui.button("Chambre pour ménage", on_click=lambda: ui.navigate.to(f"/reception/menage"))
 
@@ -91,7 +91,7 @@ def reception():
 @ui.page("/reception/menage/")
 @ui.page("/reception/menage/{dateStr}")
 def receptionMenage(dateStr=False):
-    user = app.storage.user.get("user", "Error")
+    user = app.storage.browser.get("user", "Error")
 
     if dateStr:
         dateTarget = datetime.strptime(dateStr, "%Y-%m-%d").date()
@@ -181,7 +181,7 @@ def receptionMenage(dateStr=False):
 
 @ui.page("/menage")
 def menage():
-    user = app.storage.user.get("user", "Error")
+    user = app.storage.browser.get("user", "Error")
     header()
     ui.button("Ménage", on_click=lambda: ui.navigate.to(f"/menage/menage"))
 
@@ -189,7 +189,7 @@ def menage():
 @ui.page("/menage/menage/")
 @ui.page("/menage/menage/{dateStr}")
 def menageMenage(dateStr=False):
-    user = app.storage.user.get("user", "Error")
+    user = app.storage.browser.get("user", "Error")
 
     if dateStr:
         dateTarget = datetime.strptime(dateStr, "%Y-%m-%d").date()
