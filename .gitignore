@@ -1,3 +1,5 @@
 /.vscode
 ./database.sqlite
 .nicegui/
+__pycache__/
+venv/
