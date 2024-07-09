@@ -75,7 +75,7 @@ def header(accueil=True):
         with ui.row():
             ui.button("Arrivé", on_click=arrive)
             ui.button("Depart", on_click=depart)
-            [ui.label(f"{pointage.dt.isoformat()}") for pointage in pointages]
+            [ui.label(f"{pointage.dt.isoformat()}") for pointage in pointages if pointage.auteur == user]
     else:
         ui.button("retour Accueil", on_click=lambda: ui.navigate.to("/"))
     
